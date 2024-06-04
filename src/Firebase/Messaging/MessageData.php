@@ -31,9 +31,7 @@ final class MessageData implements JsonSerializable
         $validated = [];
 
         foreach ($data as $key => $value) {
-            $value = (string) $value;
-
-            if (self::isBinary($value)) {
+            if (is_string($value) && self::isBinary($value)) {
                 throw new InvalidArgumentException(
                     "The message data field '{$key}' seems to contain binary data. As this can lead to broken messages, "
                     .'please convert it to a string representation first, e.g. with bin2hex() or base64encode().',
